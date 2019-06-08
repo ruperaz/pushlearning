@@ -6,7 +6,7 @@ import {applyMiddleware, compose, createStore} from 'redux'
 import {Provider} from 'react-redux'
 import thunk from 'redux-thunk'
 import jwtDecode from 'jwt-decode'
-import registerServiceWorker from './registerServiceWorker'
+import * as serviceWorker from './registerServiceWorker'
 import {setCurrentUser} from './user/UserActions'
 import rootReducer from './rootReducer'
 import Routes from './routes'
@@ -24,10 +24,10 @@ const store = createStore(
     composeEnhancers(
         applyMiddleware(thunk)
     )
-)
+);
 
 // User Authentication
-const token = localStorage.getItem('token')
+const token = localStorage.getItem('token');
 if (token && token !== 'undefined' && token !== '') {
     store.dispatch(setCurrentUser(jwtDecode(token)))
 }
@@ -66,7 +66,7 @@ ReactDOM.render(
     ,
 
     document.getElementById('root')
-)
+);
 
 // Service Worker
-registerServiceWorker()
+serviceWorker.unregister();

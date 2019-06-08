@@ -1,9 +1,9 @@
 {
-  "short_name": "zwitter",
-  "name": "Zwitter",
+  "short_name": "PushLearning",
+  "name": "PushLearning",
   "icons": [
     {
-      "src": "zwitter.png",
+      "src": "PushLearning.png",
       "sizes": "192x192",
       "type": "image/png"
     }
