@@ -11,6 +11,12 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import {withStyles} from '@material-ui/core/styles';
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import {connect} from "react-redux";
+import {userLogout} from "../user/UserActions";
+import {withSnackbar} from "notistack";
+import AccountCircle from '@material-ui/icons/AccountCircle';
 
 const lightColor = 'rgba(255, 255, 255, 0.7)';
 
@@ -34,10 +40,24 @@ const styles = theme => ({
     button: {
         borderColor: lightColor,
     },
+    avatar: {
+        backgroundColor: theme.palette.primary.main
+    }
 });
 
 function Header(props) {
-    const {classes, onDrawerToggle} = props;
+    const {classes, onDrawerToggle, userLogout} = props;
+
+    const [anchorEl, setAnchorEl] = React.useState(null);
+
+    function handleClick(event) {
+        setAnchorEl(event.currentTarget);
+    }
+
+    function handleClose() {
+        setAnchorEl(null);
+    }
+
 
     return (
         <React.Fragment>
@@ -73,10 +93,23 @@ function Header(props) {
                             <IconButton color="inherit" className={classes.iconButtonAvatar}>
                                 <Avatar
                                     className={classes.avatar}
-                                    src="/static/images/avatar/1.jpg"
-                                    alt="My Avatar"
-                                />
+                                    onClick={handleClick}
+                                >
+                                    <AccountCircle/>
+                                </Avatar>
                             </IconButton>
+                            <Menu
+                                id="simple-menu"
+                                anchorEl={anchorEl}
+                                keepMounted
+                                open={Boolean(anchorEl)}
+                                onClose={handleClose}
+                            >
+                                <MenuItem onClick={handleClose}>Profile</MenuItem>
+                                <MenuItem onClick={() => {
+                                    userLogout()
+                                }}>Logout</MenuItem>
+                            </Menu>
                         </Grid>
                     </Grid>
                 </Toolbar>
@@ -87,8 +120,12 @@ function Header(props) {
 }
 
 Header.propTypes = {
+    enqueueSnackbar: PropTypes.func.isRequired,
     classes: PropTypes.object.isRequired,
     onDrawerToggle: PropTypes.func.isRequired,
+    userLogout: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(Header);
+
+export default connect(null, {userLogout})(withStyles(styles)(withSnackbar(Header)))
+
