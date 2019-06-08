@@ -4,7 +4,7 @@ import {createMuiTheme, withStyles} from '@material-ui/core/styles';
 import {ThemeProvider} from '@material-ui/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Hidden from '@material-ui/core/Hidden';
-import Navigator from './Sidebar';
+import Sidebar from './Sidebar';
 import Header from './Header';
 
 
@@ -167,7 +167,7 @@ class Layout extends React.Component {
                     <CssBaseline/>
                     <nav className={classes.drawer}>
                         <Hidden smUp implementation="js">
-                            <Navigator
+                            <Sidebar
                                 PaperProps={{style: {width: drawerWidth}}}
                                 variant="temporary"
                                 open={this.state.mobileOpen}
@@ -175,7 +175,7 @@ class Layout extends React.Component {
                             />
                         </Hidden>
                         <Hidden xsDown implementation="css">
-                            <Navigator PaperProps={{style: {width: drawerWidth}}}/>
+                            <Sidebar PaperProps={{style: {width: drawerWidth}}}/>
                         </Hidden>
                     </nav>
                     <div className={classes.appContent}>

@@ -17,39 +17,39 @@ import {fetchCategories} from "../category/CategoryActions";
 
 const styles = theme => ({
     categoryHeader: {
-        paddingTop: 16,
-        paddingBottom: 16,
+        paddingTop: theme.spacing(2),
+        paddingBottom: theme.spacing(2),
     },
     categoryHeaderPrimary: {
         color: theme.palette.common.white,
     },
     item: {
-        paddingTop: 4,
-        paddingBottom: 4,
+        paddingTop: 1,
+        paddingBottom: 1,
         color: 'rgba(255, 255, 255, 0.7)',
+        '&:hover,&:focus': {
+            backgroundColor: 'rgba(255, 255, 255, 0.08)',
+        },
     },
     itemCategory: {
         backgroundColor: '#232f3e',
         boxShadow: '0 -1px 0 #404854 inset',
-        paddingTop: 16,
-        paddingBottom: 16,
+        paddingTop: theme.spacing(2),
+        paddingBottom: theme.spacing(2),
     },
     firebase: {
         fontSize: 24,
-        fontFamily: theme.typography.fontFamily,
         color: theme.palette.common.white,
-    },
-    itemActionable: {
-        '&:hover': {
-            backgroundColor: 'rgba(255, 255, 255, 0.08)',
-        },
     },
     itemActiveItem: {
         color: '#4fc3f7',
     },
     itemPrimary: {
-        color: 'inherit',
-        fontSize: theme.typography.fontSize
+        fontSize: 'inherit',
+    },
+    itemIcon: {
+        minWidth: 'auto',
+        marginRight: theme.spacing(2),
     },
     divider: {
         marginTop: theme.spacing(2),
@@ -58,14 +58,13 @@ const styles = theme => ({
 
 class Sidebar extends Component {
     componentDidMount() {
-        console.log( this.props);
         this.props.fetchCategories();
     }
 
     render() {
-        const {classes,PaperProps} = this.props;
+        const {classes, ...other} = this.props;
         return (
-            <Drawer variant="permanent" PaperProps={PaperProps}>
+            <Drawer variant="permanent" {...other}>
                 <List disablePadding>
                     <ListItem className={clsx(classes.firebase, classes.item, classes.itemCategory)}>
                         PushLearning
