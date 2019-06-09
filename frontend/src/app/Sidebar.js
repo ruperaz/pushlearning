@@ -62,7 +62,7 @@ class Sidebar extends Component {
     }
 
     render() {
-        const {classes, ...other} = this.props;
+        const {classes, staticContext, fetchCategories, ...other} = this.props;
         return (
             <Drawer variant="permanent" {...other}>
                 <List disablePadding>
