@@ -90,10 +90,10 @@ function Header(props) {
                             </Tooltip>
                         </Grid>
                         <Grid item>
-                            <IconButton color="inherit" className={classes.iconButtonAvatar}>
+                            <IconButton color="inherit" className={classes.iconButtonAvatar}
+                                        onClick={handleClick}>
                                 <Avatar
                                     className={classes.avatar}
-                                    onClick={handleClick}
                                 >
                                     <AccountCircle/>
                                 </Avatar>
