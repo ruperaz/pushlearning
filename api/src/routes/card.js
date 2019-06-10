@@ -2,6 +2,7 @@
 'use strict'
 
 // Imports
+const config = require('../config/index')
 const express = require('express')
 const isEmpty = require('lodash/isEmpty')
 
@@ -13,7 +14,7 @@ let Card = require('../models/card')
 let cardRoutes = express.Router()
 
 // Cards (/cards)
-cardRoutes.get('/cards/:categoryId', authMiddleware, (request, response) => {
+cardRoutes.get(config.deployUrl + '/cards/:categoryId', authMiddleware, (request, response) => {
   let responseData = {
     success: false,
     data: {},
@@ -32,7 +33,7 @@ cardRoutes.get('/cards/:categoryId', authMiddleware, (request, response) => {
 
 
 // NextTodayCard (/nexttodaycard/:categoryId)
-cardRoutes.get('/nexttodaycard/:categoryId?', authMiddleware, (request, response) => {
+cardRoutes.get(config.deployUrl + '/nexttodaycard/:categoryId?', authMiddleware, (request, response) => {
   let responseData = {
     success: false,
     data: {},
@@ -98,7 +99,7 @@ cardRoutes.get('/nexttodaycard/:categoryId?', authMiddleware, (request, response
 
 
 // Card Add (/card/add)
-cardRoutes.post('/card/add', authMiddleware, (request, response) => {
+cardRoutes.post(config.deployUrl + '/card/add', authMiddleware, (request, response) => {
   let responseData = {
     success: false,
     data: {},
@@ -147,7 +148,7 @@ cardRoutes.post('/card/add', authMiddleware, (request, response) => {
 })
 
 // Single Cards (/card/cardId)
-cardRoutes.get('/card/:cardId', authMiddleware, (request, response) => {
+cardRoutes.get(config.deployUrl + '/card/:cardId', authMiddleware, (request, response) => {
   let responseData = {
     success: false,
     data: {},
@@ -174,7 +175,7 @@ cardRoutes.get('/card/:cardId', authMiddleware, (request, response) => {
 
 
 // Card update (/card/update)
-cardRoutes.put('/card/update', authMiddleware, (request, response) => {
+cardRoutes.put(config.deployUrl + '/card/update', authMiddleware, (request, response) => {
     let responseData = {
         success: false,
         data: {},

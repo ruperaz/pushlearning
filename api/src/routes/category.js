@@ -2,6 +2,7 @@
 'use strict'
 
 // Imports
+const config = require('../config/index')
 const express = require('express')
 const isEmpty = require('lodash/isEmpty')
 
@@ -13,7 +14,7 @@ let Category = require('../models/category')
 let categoryRoutes = express.Router()
 
 // Categorys (/categories)
-categoryRoutes.get('/categories', authMiddleware, (request, response) => {
+categoryRoutes.get(config.deployUrl + '/categories', authMiddleware, (request, response) => {
     let responseData = {
         success: false,
         data: {},
@@ -58,7 +59,7 @@ categoryRoutes.get('/categories', authMiddleware, (request, response) => {
 })
 
 // Category Add (/category/add)
-categoryRoutes.post('/category/add', authMiddleware, (request, response) => {
+categoryRoutes.post(config.deployUrl + '/category/add', authMiddleware, (request, response) => {
     let responseData = {
         success: false,
         data: {},
@@ -106,7 +107,7 @@ categoryRoutes.post('/category/add', authMiddleware, (request, response) => {
 })
 
 // Single Categorys (/category/categoryId)
-categoryRoutes.get('/category/:categoryId', authMiddleware, (request, response) => {
+categoryRoutes.get(config.deployUrl + '/category/:categoryId', authMiddleware, (request, response) => {
     let responseData = {
         success: false,
         data: {},

@@ -6,7 +6,7 @@ const express = require('express')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 
-const config = require('./../config')
+const config = require('../config/index')
 let authMiddleware = require('./middlewares/auth')
 let User = require('../models/user')
 
@@ -14,7 +14,7 @@ let User = require('../models/user')
 let userRoutes = express.Router()
 
 // Login
-userRoutes.post('/user/login', (request, response) => {
+userRoutes.post(config.deployUrl + '/user/login', (request, response) => {
   let responseData = {
     success: false,
     data: {},
@@ -62,7 +62,7 @@ userRoutes.post('/user/login', (request, response) => {
 })
 
 // Register
-userRoutes.post('/user/register', (request, response) => {
+userRoutes.post(config.deployUrl + '/user/register', (request, response) => {
   let responseData = {
     success: false,
     data: {},
