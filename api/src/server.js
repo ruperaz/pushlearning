@@ -3,6 +3,7 @@
 
 // Imports
 const express = require('express')
+const helmet = require('helmet')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const bodyParser = require('body-parser')
@@ -17,6 +18,7 @@ let categoryRoutes = require('./routes/category')
 // Setup
 let apiServer = express()
 apiServer.set('APP_SECRET', config.secret)
+apiServer.use(helmet())
 
 // MongoDB (mongoose)
 mongoose.connect(config.databaseUrl, { useNewUrlParser: true })
