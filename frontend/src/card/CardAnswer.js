@@ -23,7 +23,8 @@ const styles = theme => ({
         height: '300px',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        cursor: 'pointer'
 
     },
     buttonContainer: {
@@ -38,7 +39,13 @@ const styles = theme => ({
 
 class CardAnswer extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            showAnswer: false,
+        }
 
+    }
     componentDidMount() {
         if(this.props.category){
             this.props.fetchNextTodayCard(this.props.category.details._id);
@@ -81,20 +88,39 @@ class CardAnswer extends Component {
             }
         })
 
-    }
+    };
 
 
     render() {
         const classes = this.props.classes;
         return (
             <Card className={classes.cardContainer}>
-                <div className={classes.questionContainer}>
-                    {this.props.nextTodayCard.loading ? <Loading/> :
-                        <Typography color="inherit" variant="h5" component="h1">
-                            {this.props.nextTodayCard.details._id?  this.props.nextTodayCard.details.question : 'No Card'}
-                        </Typography>
-                    }
-                </div>
+                {this.state.showAnswer
+                    ? <div className={classes.questionContainer} onMouseDown={() => {
+                        this.setState({showAnswer: true})
+                    }} onMouseUp={() => {
+                        this.setState({showAnswer: false})
+                    }}>
+                        {this.props.nextTodayCard.loading ? <Loading/> :
+                            <Typography color="inherit" variant="h5" component="h1">
+                                {this.props.nextTodayCard.details._id ? this.props.nextTodayCard.details.answer : 'No Card'}
+                            </Typography>
+                        }
+                    </div>
+                    : <div className={classes.questionContainer} onMouseDown={() => {
+                        this.setState({showAnswer: true})
+                    }} onMouseUp={() => {
+                        this.setState({showAnswer: false})
+                    }}>
+                        {this.props.nextTodayCard.loading ? <Loading/> :
+                            <Typography color="inherit" variant="h5" component="h1">
+                                {this.props.nextTodayCard.details._id ? this.props.nextTodayCard.details.question : 'No Card'}
+                            </Typography>
+                        }
+                    </div>
+
+                }
+
                 <div className={classes.buttonContainer}>
                     <Button className={classes.okBtn} onClick={()=>{this.onClickAnswerBtn(true)}} variant="contained"  color="primary">
                         I Know
@@ -115,7 +141,7 @@ CardAnswer.propTypes = {
     nextTodayCard: PropTypes.object.isRequired,
     fetchNextTodayCard: PropTypes.func.isRequired,
     updateCard: PropTypes.func.isRequired,
-}
+};
 
 function mapStateToProps(state) {
     return {
