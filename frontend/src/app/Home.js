@@ -13,6 +13,12 @@ class Home extends Component {
         this.props.fetchCategories()
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.user.isAuthenticated !== this.props.user.isAuthenticated) {
+            this.props.fetchCategories()
+        }
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -26,12 +32,14 @@ class Home extends Component {
 
 Home.propTypes = {
     categories: PropTypes.object.isRequired,
-    fetchCategories: PropTypes.func.isRequired
-}
+    fetchCategories: PropTypes.func.isRequired,
+    user: PropTypes.object.isRequired
+};
 
 function mapStateToProps(state) {
     return {
-        categories: state.categories
+        categories: state.categories,
+        user: state.user
     }
 }
 
