@@ -15,7 +15,7 @@ export function fetchCategories() {
             type: FETCH_CATEGORIES_BEGIN
         })
 
-        return fetch(`${config.url.api}categories`,authHeader).then(function (response) {
+        return fetch(`${config.url.api}categories`, authHeader(localStorage.getItem('token'))).then(function (response) {
             if (response.ok) {
                 response.json().then(function (response) {
                     if (response.data.length > 0) {
@@ -41,7 +41,7 @@ export function fetchCategory(categoryId) {
             type: FETCH_CATEGORY_BEGIN
         })
 
-        return fetch(`${config.url.api}category/${categoryId}` ,authHeader).then(function (response) {
+        return fetch(`${config.url.api}category/${categoryId}`, authHeader(localStorage.getItem('token'))).then(function (response) {
             if (response.ok) {
                 response.json().then(function (response) {
                     if (response.success) {
@@ -67,7 +67,7 @@ export function postCategory (category) {
         return fetch(`${ config.url.api }category/add`, {
             method: 'post',
             body: JSON.stringify(category),
-            ...authHeader
+            ...authHeader(localStorage.getItem('token'))
         })
             .then(response => response.json())
     }

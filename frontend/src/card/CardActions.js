@@ -16,7 +16,7 @@ export function fetchCards (categoryId) {
             type: FETCH_CARDS_BEGIN
         })
 
-        return fetch(`${ config.url.api }cards/${ categoryId }`,authHeader).then(function (response) {
+        return fetch(`${config.url.api}cards/${categoryId}`, authHeader(localStorage.getItem('token'))).then(function (response) {
             if (response.ok) {
                 response.json().then(function (response) {
                     dispatch({
@@ -42,7 +42,7 @@ export function fetchNextTodayCard (categoryId) {
         })
 
         if(categoryId){
-            return fetch(`${ config.url.api }nexttodaycard/${ categoryId }`,authHeader).then(function (response) {
+            return fetch(`${config.url.api}nexttodaycard/${categoryId}`, authHeader(localStorage.getItem('token'))).then(function (response) {
                 if (response.ok) {
                     response.json().then(function (response) {
                         if (response.success) {
@@ -59,7 +59,7 @@ export function fetchNextTodayCard (categoryId) {
                 console.log('Fetch failed!', e)
             })
         }else{
-            return fetch(`${ config.url.api }nexttodaycard`,authHeader).then(function (response) {
+            return fetch(`${config.url.api}nexttodaycard`, authHeader(localStorage.getItem('token'))).then(function (response) {
                 if (response.ok) {
                     response.json().then(function (response) {
                         if (response.success) {
@@ -87,7 +87,7 @@ export function postCard (card) {
         return fetch(`${ config.url.api }card/add`, {
             method: 'post',
             body: JSON.stringify(card),
-            ...authHeader
+            ...authHeader(localStorage.getItem('token'))
         })
             .then(response => response.json())
     }
@@ -101,7 +101,7 @@ export function updateCard (card) {
         return fetch(`${ config.url.api }card/update`, {
             method: 'put',
             body: JSON.stringify(card),
-            ...authHeader
+            ...authHeader(localStorage.getItem('token'))
         })
             .then(response => response.json())
     }

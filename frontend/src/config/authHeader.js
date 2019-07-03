@@ -1,9 +1,8 @@
-
-const authHeader = {
-    headers: {
-        'Content-Type': 'application/json',
-        'x-access-token': localStorage.getItem('token')
+export default (token) => {
+    return {
+        headers: {
+            'Content-Type': 'application/json',
+            'x-access-token': token
+        }
     }
-};
-
-export default authHeader;
+}
