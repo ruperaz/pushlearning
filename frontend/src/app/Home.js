@@ -13,12 +13,6 @@ class Home extends Component {
         this.props.fetchCategories()
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.user.isAuthenticated !== this.props.user.isAuthenticated) {
-            this.props.fetchCategories()
-        }
-    }
-
     render() {
         return (
             <React.Fragment>

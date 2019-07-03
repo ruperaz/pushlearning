@@ -17,6 +17,7 @@ import Loading from "../app/Loading"
 import {withSnackbar} from "notistack";
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import {fetchCategories} from "../category/CategoryActions";
 
 
 const styles = theme => ({
@@ -73,6 +74,7 @@ class UserLogin extends Component {
                         autoHideDuration: 1500
                     });
 
+                    this.props.fetchCategories();
                     // Redirect
                     setTimeout(() => {
                         this.props.history.push("/");
@@ -167,8 +169,9 @@ class UserLogin extends Component {
 
 UserLogin.propTypes = {
     postLogin: PropTypes.func.isRequired,
-    enqueueSnackbar: PropTypes.func.isRequired
+    enqueueSnackbar: PropTypes.func.isRequired,
+    fetchCategories: PropTypes.func.isRequired
 }
 
 
-export default connect(null, {postLogin})(withStyles(styles)(withSnackbar(UserLogin)))
+export default connect(null, {postLogin, fetchCategories})(withStyles(styles)(withSnackbar(UserLogin)))
